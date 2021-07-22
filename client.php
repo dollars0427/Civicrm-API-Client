@@ -1,6 +1,7 @@
 <?php
 namespace CivicrmClient;
 
+//The client name is temp. Maybe change
 class CivicrmClient {
   public function __construct($base_url, $api_key, $site_key) {
     global $common;
