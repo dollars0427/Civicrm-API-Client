@@ -108,4 +108,39 @@ class CivicrmClient {
 
     return $result;
   }
+
+  /**
+   * Update contact in the CRM by given id and information.
+   *
+   * @param int $id Contact id of the target contact.
+   * @param array $contact_info An array which contains all required contact information.
+   * @return stdClass $result The result which returned by the API.
+   */
+
+   public function updateContact($id, $contact_info){
+     //Setup the id to contact info.
+     $contact_info['id'] = $id;
+     $contact_info_json = json_encode($contact_info);
+     $params = [
+       'key' => $this->site_key,
+       'api_key' => $this->api_key,
+       'entity' => 'contact',
+       'action' => 'create',
+       'json' => $contact_info_json,
+     ];
+
+     $params_string = http_build_query($params);
+     $api_url = "{$this->base_url}?{$params_string}";
+
+     $curl = curl_init();
+     curl_setopt($curl, CURLOPT_URL, $api_url);
+     curl_setopt($curl, CURLOPT_FOLLOWLOCATION, true);
+     curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+     $json_result = curl_exec($curl);
+     curl_close($curl);
+
+     $result = json_decode($json_result);
+
+     return $result;
+   }
 }
