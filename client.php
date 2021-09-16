@@ -36,6 +36,7 @@ class CivicrmClient {
 
     $curl = curl_init();
     curl_setopt($curl, CURLOPT_URL, $api_url);
+    curl_setopt($curl, CURLOPT_FOLLOWLOCATION, true);
     curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
     $json_result = curl_exec($curl);
     curl_close($curl);
@@ -66,6 +67,7 @@ class CivicrmClient {
 
     $curl = curl_init();
     curl_setopt($curl, CURLOPT_URL, $api_url);
+    curl_setopt($curl, CURLOPT_FOLLOWLOCATION, true);
     curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
     $json_result = curl_exec($curl);
     curl_close($curl);
@@ -97,6 +99,7 @@ class CivicrmClient {
 
     $curl = curl_init();
     curl_setopt($curl, CURLOPT_URL, $api_url);
+    curl_setopt($curl, CURLOPT_FOLLOWLOCATION, true);
     curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
     $json_result = curl_exec($curl);
     curl_close($curl);
