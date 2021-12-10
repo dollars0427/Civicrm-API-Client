@@ -1,0 +1,17 @@
+{
+    "name": "sardo/civicrm-api-client",
+    "description": "Uncompleted Civicrm PHP client",
+    "type": "library",
+    "autoload": {
+        "psr-4": {
+            "Sardo\\CivicrmApiClient\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Sardo Ip",
+            "email": "sardo.ip@sardo.work"
+        }
+    ],
+    "require": {}
+}
