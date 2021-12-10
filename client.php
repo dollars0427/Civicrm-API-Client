@@ -143,4 +143,134 @@ class CivicrmClient {
 
      return $result;
    }
+
+   /**
+    * Create event in the CRM by given information.
+    *
+    * @param array $event_info An array which contains all required event information.
+    * @return stdClass $result The result which returned by the API.
+    */
+
+   public function createEvent($event_info){
+     $event_info_json = json_encode($event_info);
+     $params = [
+       'key' => $this->site_key,
+       'api_key' => $this->api_key,
+       'entity' => 'event',
+       'action' => 'create',
+       'json' => $event_info_json,
+     ];
+
+     $params_string = http_build_query($params);
+     $api_url = "{$this->base_url}?{$params_string}";
+
+     $curl = curl_init();
+     curl_setopt($curl, CURLOPT_URL, $api_url);
+     curl_setopt($curl, CURLOPT_FOLLOWLOCATION, true);
+     curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+     $json_result = curl_exec($curl);
+     curl_close($curl);
+
+     $result = json_decode($json_result);
+
+     return $result;
+   }
+
+   /**
+    * Search event in the CRM by given information.
+    *
+    * @param array $event_info An array which contains all required contact information.
+    * @return stdClass $result The result which returned by the API.
+    */
+
+   public function searchEvent($event_info){
+     $event_info_json = json_encode($event_info);
+     $params = [
+       'key' => $this->site_key,
+       'api_key' => $this->api_key,
+       'entity' => 'event',
+       'action' => 'get',
+       'json' => $event_info_json,
+     ];
+     $params_string = http_build_query($params);
+     $api_url = "{$this->base_url}?{$params_string}";
+
+     $curl = curl_init();
+     curl_setopt($curl, CURLOPT_URL, $api_url);
+     curl_setopt($curl, CURLOPT_FOLLOWLOCATION, true);
+     curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+     $json_result = curl_exec($curl);
+     curl_close($curl);
+
+     $result = json_decode($json_result);
+
+     return $result;
+   }
+
+   /**
+    * Update event in the CRM by given id and information.
+    *
+    * @param int $id Contact id of the target contact.
+    * @param array $event_info An array which contains all required contact information.
+    * @return stdClass $result The result which returned by the API.
+    */
+
+   public function updateEvent($id, $event_info){
+     $event_info_json = json_encode($event_info);
+     $params = [
+       'key' => $this->site_key,
+       'api_key' => $this->api_key,
+       'entity' => 'event',
+       'action' => 'get',
+       'json' => $event_info_json,
+     ];
+     $params_string = http_build_query($params);
+     $api_url = "{$this->base_url}?{$params_string}";
+
+     $curl = curl_init();
+     curl_setopt($curl, CURLOPT_URL, $api_url);
+     curl_setopt($curl, CURLOPT_FOLLOWLOCATION, true);
+     curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+     $json_result = curl_exec($curl);
+     curl_close($curl);
+
+     $result = json_decode($json_result);
+
+     return $result;
+   }
+
+   /**
+    * Create event participant in the CRM by given id and information.
+    *
+    * @param int $cid Contact id of the target contact.
+    * @param int $eid Event id of the target event.
+    * @param array $participant_info An array which contains all required contact information.
+    * @return stdClass $result The result which returned by the API.
+    */
+
+    public function createParticipant($cid, $eid, $participant_info){
+      $participant_info['contact_id'] = $cid;
+      $participant_info['event_id'] = $eid;
+      $participant_info_json = json_encode($participant_info);
+      $params = [
+        'key' => $this->site_key,
+        'api_key' => $this->api_key,
+        'entity' => 'participant',
+        'action' => 'create',
+        'json' => $participant_info_json,
+      ];
+      $params_string = http_build_query($params);
+      $api_url = "{$this->base_url}?{$params_string}";
+
+      $curl = curl_init();
+      curl_setopt($curl, CURLOPT_URL, $api_url);
+      curl_setopt($curl, CURLOPT_FOLLOWLOCATION, true);
+      curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+      $json_result = curl_exec($curl);
+      curl_close($curl);
+
+      $result = json_decode($json_result);
+
+      return $result;
+    }
 }
