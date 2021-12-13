@@ -1,5 +1,5 @@
 <?php
-namespace CivicrmClient;
+namespace Sardo\CivicrmApiClient;
 
 //The client name is temp. Maybe change
 class CivicrmClient {
