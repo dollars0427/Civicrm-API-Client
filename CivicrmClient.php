@@ -273,4 +273,37 @@ class CivicrmClient {
 
       return $result;
     }
+
+    /**
+     * Create phone in the CRM by given id and information.
+     *
+     * @param int $cid Contact id of the target contact.
+     * @param array $phone_info An array which contains all required phone information.
+     * @return stdClass $result The result which returned by the API.
+     */
+
+     public function createPhone($cid, $phone_info){
+       $phone_info['contact_id'] = $cid;
+       $phone_info_json = json_encode($phone_info);
+       $params = [
+         'key' => $this->site_key,
+         'api_key' => $this->api_key,
+         'entity' => 'phone',
+         'action' => 'create',
+         'json' => $phone_info_json,
+       ];
+       $params_string = http_build_query($params);
+       $api_url = "{$this->base_url}?{$params_string}";
+
+       $curl = curl_init();
+       curl_setopt($curl, CURLOPT_URL, $api_url);
+       curl_setopt($curl, CURLOPT_FOLLOWLOCATION, true);
+       curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+       $json_result = curl_exec($curl);
+       curl_close($curl);
+
+       $result = json_decode($json_result);
+
+       return $result;
+     }
 }
